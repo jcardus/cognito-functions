@@ -7,18 +7,25 @@ Description: >
 # More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
 Globals:
   Function:
-    Timeout: 30
+    Timeout: 5
 
 Resources:
   HelloWorldFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
+      MemorySize: 1024
       FunctionName: migrate-user
       CodeUri: hello-world/
       Handler: app.lambdaHandler
       Runtime: nodejs18.x
       Architectures:
         - x86_64
+  CognitoInvokePermission:
+    Type: 'AWS::Lambda::Permission'
+    Properties:
+      Action: 'lambda:InvokeFunction'
+      FunctionName: !Ref HelloWorldFunction
+      Principal: cognito-idp.amazonaws.com
 
 Outputs:
   HelloWorldFunction:
