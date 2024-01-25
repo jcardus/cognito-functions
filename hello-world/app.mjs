@@ -1,6 +1,8 @@
-export const lambdaHandler = async (e) => {
-    const AmazonCognitoIdentity = require('amazon-cognito-identity-js')
+import AmazonCognitoIdentity  from 'amazon-cognito-identity-js'
+import axios from 'axios'
 
+export const lambdaHandler = async (e) => {
+    console.log(e)
     const poolData = {
         UserPoolId: 'us-east-1_SWTiH7d38',
         ClientId: '16seahimlsre6ocin0uvivtet2'
@@ -25,7 +27,7 @@ export const lambdaHandler = async (e) => {
                 console.log('failure, lets try traccar', err)
                 const body = 'email=' + encodeURIComponent(Username) + '&password=' + encodeURIComponent(Password)
                 console.log(body)
-                require('axios').post('https://api2.pinme.io/api/session', body, {
+                axios.post('https://api2.pinme.io/api/session', body, {
                     headers: {
                         'user-agent': 'pinme-backend',
                         'Content-Type': 'application/x-www-form-urlencoded'

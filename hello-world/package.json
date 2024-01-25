@@ -7,7 +7,8 @@
   "author": "SAM CLI",
   "license": "MIT",
   "dependencies": {
-    "axios": ">=0.21.1"
+    "amazon-cognito-identity-js": "^6.3.7",
+    "axios": "1.6.6"
   },
   "scripts": {
     "test": "mocha tests/unit/"
