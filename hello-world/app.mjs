@@ -42,7 +42,6 @@ export const lambdaHandler = async (e) => {
     }))
 
     e.response.userAttributes = {
-        username: Username,
         email: Username,
         email_verified: true
     }
