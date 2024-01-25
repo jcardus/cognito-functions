@@ -1,7 +1,7 @@
 import AmazonCognitoIdentity  from 'amazon-cognito-identity-js'
 import axios from 'axios'
 
-export const lambdaHandler = async (e) => {
+export const lambdaHandler = async (e, context) => {
     console.log(e)
     const poolData = {
         UserPoolId: 'us-east-1_SWTiH7d38',
@@ -43,10 +43,11 @@ export const lambdaHandler = async (e) => {
 
     e.response.userAttributes = {
         email: Username,
-        email_verified: true
+        email_verified: 'true',
+        username: Username
     }
     e.response.finalUserStatus = 'CONFIRMED'
-    e.response.messageAction = 'SUPPRESS'
+    context.succeed(e)
     console.log('returning', e)
     return e
 }
